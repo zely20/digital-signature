@@ -5,19 +5,17 @@ import java.security.*;
 public class Signature {
 
     public byte[] creatSign(byte[] data, PrivateKey privateKey ) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
-        java.security.Signature sign = java.security.Signature.getInstance("SHA256withDSA");
+        java.security.Signature sign = java.security.Signature.getInstance("SHA256withRSA");
         sign.initSign(privateKey);
         sign.update(data);
         byte[] signature = sign.sign();
         return signature;
     }
 
-    public boolean checkSign(byte[] data, PrivateKey privateKey, PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
-        java.security.Signature sign = java.security.Signature.getInstance("SHA256withDSA");
-        byte[] signature = creatSign(data, privateKey);
+    public boolean checkSign(byte[] data, byte[] signature, PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+        java.security.Signature sign = java.security.Signature.getInstance("SHA256withRSA");
         sign.initVerify(publicKey);
         sign.update(data);
         return sign.verify(signature);
     }
-
 }

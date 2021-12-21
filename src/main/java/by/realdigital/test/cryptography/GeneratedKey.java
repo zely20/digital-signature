@@ -21,15 +21,15 @@ public class GeneratedKey {
         return keyPairGenerator.generateKeyPair();
     }
 
-    public KeyPair loadKeyFromFiles(String [] arrayFromConsole) {
+    public KeyPair loadKeyFromFiles(String fileName) {
         PrivateKey privateKey = null;
         PublicKey publicKey = null;
         InputFile inputFile = new InputFileImpl();
         try {
             KeyFactory kf = KeyFactory.getInstance("RSA");
             privateKey = kf.generatePrivate
-                    (new PKCS8EncodedKeySpec(inputFile.loadFromFiles(arrayFromConsole, ".sec")));
-            publicKey = kf.generatePublic(new X509EncodedKeySpec(inputFile.loadFromFiles(arrayFromConsole, ".open")));
+                    (new PKCS8EncodedKeySpec(inputFile.loadFromFiles(fileName, ".sec")));
+            publicKey = kf.generatePublic(new X509EncodedKeySpec(inputFile.loadFromFiles(fileName, ".open")));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
