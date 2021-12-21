@@ -1,10 +1,7 @@
 package by.realdigital.test;
 
 import by.realdigital.test.cryptography.GeneratedKey;
-import by.realdigital.test.io.Input;
-import by.realdigital.test.io.InputFileImpl;
-import by.realdigital.test.io.InputImpl;
-import by.realdigital.test.io.OutputToFile;
+import by.realdigital.test.io.*;
 
 import java.security.KeyPair;
 
@@ -15,10 +12,12 @@ public class Main {
         String[] string  = input.inputFromConsole();
         GeneratedKey gk = new GeneratedKey();
         if(string[0].equals("genkey")) {
-            OutputToFile outputToFile = new OutputToFile();
+            OutputFile outputToFile = new OutputToFile();
             gk = new GeneratedKey();
             KeyPair keyPair = gk.getPairKey();
-            outputToFile.createKeyFiles(string[1], keyPair);
+
+            outputToFile.createKeyFiles(string[1], keyPair.getPrivate(), ".sec");
+            outputToFile.createKeyFiles(string[1], keyPair.getPublic(), ".open");
             System.out.println(keyPair.getPublic().toString());
             System.out.println(keyPair.getPrivate().toString());
         } else if(string[0].equals("sign")) {

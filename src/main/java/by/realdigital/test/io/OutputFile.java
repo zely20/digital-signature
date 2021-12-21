@@ -1,8 +1,8 @@
 package by.realdigital.test.io;
 
-import java.security.KeyPair;
+import java.security.Key;
 
 public interface OutputFile {
 
-    void createKeyFiles(String fileName, KeyPair keyPair);
+    void createKeyFiles(String fileName, Key key, String suffix);
 }
