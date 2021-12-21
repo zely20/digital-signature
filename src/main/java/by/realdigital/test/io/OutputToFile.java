@@ -6,17 +6,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.KeyPair;
 
-public class OutputToFile {
+public class OutputToFile implements OutputFile{
 
-    public void createFile(String fileName, KeyPair keyPair) {
+    @Override
+    public void createKeyFiles(String fileName, KeyPair keyPair) {
         File secretFile = new File(fileName + ".sec");
         File openFile = new File(fileName + ".open");
-        try (FileWriter fileOpenWriter = new FileWriter(openFile);
-             FileWriter fileSecretWriter = new FileWriter(secretFile);
-             FileOutputStream fio = new FileOutputStream(secretFile)) {
-            fio.write(keyPair.getPrivate().getEncoded());
-           /* fileOpenWriter.write(keyPair.getPublic().getEncoded());
-            fileSecretWriter.write(keyPair.getPrivate().getEncoded());*/
+        try (FileOutputStream outputSecret = new FileOutputStream(secretFile);
+             FileOutputStream outputPublic = new FileOutputStream(openFile)) {
+            outputSecret.write(keyPair.getPrivate().getEncoded());
+            outputPublic.write(keyPair.getPublic().getEncoded());
         } catch (IOException e) {
             e.printStackTrace();
         }
