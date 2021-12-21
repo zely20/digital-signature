@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.security.Key;
 import java.security.KeyPair;
 
-public class OutputToFile implements OutputFile{
+public class OutputFileImpl implements OutputFile{
 
     @Override
     public void createKeyFiles(String fileName, Key key, String suffix) {

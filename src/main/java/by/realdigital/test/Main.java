@@ -18,7 +18,7 @@ public class Main {
         while (flag) {
             String[] string = input.inputFromConsole();
             if (string[0].equals("genkey")) {
-                OutputFile outputToFile = new OutputToFile();
+                OutputFile outputToFile = new OutputFileImpl();
                 gk = new GeneratedKey();
                 KeyPair keyPair = gk.getPairKey();
                 outputToFile.createKeyFiles(string[1], keyPair.getPrivate(), ".sec");
