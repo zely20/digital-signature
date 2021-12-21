@@ -3,6 +3,7 @@ package by.realdigital.test.cryptography;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 public class GeneratedKey {
 
@@ -13,7 +14,7 @@ public class GeneratedKey {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        keyPairGenerator.initialize(2048);
+        keyPairGenerator.initialize(2048, new SecureRandom());
         return keyPairGenerator.generateKeyPair();
     }
 }

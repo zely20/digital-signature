@@ -5,8 +5,6 @@ import by.realdigital.test.io.Input;
 import by.realdigital.test.io.InputImpl;
 import by.realdigital.test.io.OutputToFile;
 
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -17,7 +15,7 @@ public class Main {
             outputToFile.createFile(string[1],new GeneratedKey().getPairKey());
         }
         GeneratedKey key = new GeneratedKey();
-        System.out.println("private key = " + key.getPairKey().getPrivate());
-        System.out.println("open key = " + key.getPairKey().getPublic());
+        System.out.println("private key = " + key.getPairKey().getPrivate().getEncoded());
+        System.out.println("open key = " + key.getPairKey().getPublic().getEncoded());
     }
 }
