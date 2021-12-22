@@ -4,7 +4,7 @@ import java.security.*;
 
 public class Signature {
 
-    public byte[] creatSign(byte[] data, PrivateKey privateKey ) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    public byte[] creatSign(byte[] data, PrivateKey privateKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         java.security.Signature sign = java.security.Signature.getInstance("SHA256withRSA");
         sign.initSign(privateKey);
         sign.update(data);

@@ -9,7 +9,7 @@ import java.util.Base64;
 
 public class SignMapper {
 
-    public static String signToJson(PublicKey publicKey, String fileName, byte[] cratedSign ) {
+    public static String signToJson(PublicKey publicKey, String fileName, byte[] cratedSign) {
         String json = null;
         String keyBase64 = Base64.getEncoder().encodeToString(publicKey.getEncoded());
         Sign sign = new Sign(cratedSign, fileName, keyBase64);

@@ -1,7 +1,6 @@
 package by.realdigital.test.model;
 
 import java.io.Serializable;
-import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.Objects;
 
