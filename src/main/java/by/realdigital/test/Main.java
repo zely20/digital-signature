@@ -10,13 +10,13 @@ import java.security.*;
 public class Main {
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
-        Input input = new InputImpl();
+        InputConsole inputConsole = new InputConsoleImpl();
         InputFile inputFile = new InputFileImpl();
 
         GeneratedKey gk = new GeneratedKey();
         boolean flag = true;
         while (flag) {
-            String[] string = input.inputFromConsole();
+            String[] string = inputConsole.inputFromConsole();
             if (string[0].equals("genkey")) {
                 OutputFile outputToFile = new OutputFileImpl();
                 gk = new GeneratedKey();

@@ -1,6 +1,6 @@
 package by.realdigital.test.io;
 
-public interface Input {
+public interface InputConsole {
 
     String[] inputFromConsole();
 }

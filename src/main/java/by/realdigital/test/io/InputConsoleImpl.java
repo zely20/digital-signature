@@ -2,7 +2,7 @@ package by.realdigital.test.io;
 
 import java.util.Scanner;
 
-public class InputImpl implements Input {
+public class InputConsoleImpl implements InputConsole {
 
     private final static String HELLO_MESSAGE = "1. For generate keys enter: " + System.lineSeparator()
             + "genkey and file_name" + System.lineSeparator()
