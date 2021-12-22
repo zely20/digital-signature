@@ -12,13 +12,13 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 public class Runner {
+    boolean flag = true;
 
     public void run(){
         InputConsole inputConsole = new InputConsoleImpl();
         InputFile inputFile = new InputFileImpl();
         OutputFile outputToFile = new OutputFileImpl();
         GeneratedKey gk = new GeneratedKey();
-        boolean flag = true;
         while (flag) {
             String[] dataFromConsole = inputConsole.inputFromConsole();
             if (dataFromConsole[0].equals("genkey")) {
@@ -40,7 +40,7 @@ public class Runner {
                    System.out.println("Please check your data!!!");
                }
             } else if (dataFromConsole[0].equals("exit")) {
-                flag = false;
+                exit();
             }
         }
     }
@@ -94,5 +94,9 @@ public class Runner {
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         }
+    }
+
+    private void exit(){
+        this.flag = false;
     }
 }
