@@ -14,39 +14,44 @@ import java.util.Base64;
 public class Runner {
     boolean flag = true;
 
-    public void run(){
+    public void run() {
         InputConsole inputConsole = new InputConsoleImpl();
         InputFile inputFile = new InputFileImpl();
         OutputFile outputToFile = new OutputFileImpl();
         GeneratedKey gk = new GeneratedKey();
         while (flag) {
             String[] dataFromConsole = inputConsole.inputFromConsole();
-            if (dataFromConsole[0].equals("genkey")) {
-                if (dataFromConsole.length == 2) {
-                    genKey(gk, outputToFile, dataFromConsole);
-                } else {
-                    System.out.println("Please check your data!!!");
-                }
-            } else if (dataFromConsole[0].equals("sign")) {
-                if (dataFromConsole.length == 3) {
-                    signData(inputFile, dataFromConsole, gk, outputToFile);
-                } else {
-                    System.out.println("Please check your data!!!");
-                }
-            } else if (dataFromConsole[0].equals("check")) {
-               if(dataFromConsole.length == 3){
-                   checkSign(inputFile, dataFromConsole);
-               } else {
-                   System.out.println("Please check your data!!!");
-               }
-            } else if (dataFromConsole[0].equals("exit")) {
-                exit();
+            switch (dataFromConsole[0]) {
+                case "genkey":
+                    if (dataFromConsole.length == 2) {
+                        genKey(outputToFile, dataFromConsole);
+                    } else {
+                        System.out.println("Please check your data!!!");
+                    }
+                    break;
+                case "sign":
+                    if (dataFromConsole.length == 3) {
+                        signData(inputFile, dataFromConsole, gk, outputToFile);
+                    } else {
+                        System.out.println("Please check your data!!!");
+                    }
+                    break;
+                case "check":
+                    if (dataFromConsole.length == 3) {
+                        checkSign(inputFile, dataFromConsole);
+                    } else {
+                        System.out.println("Please check your data!!!");
+                    }
+                    break;
+                case "exit":
+                    exit();
+                    break;
             }
         }
     }
 
-    private void genKey(GeneratedKey gk, OutputFile outputToFile, String[] dataFromConsole) {
-        gk = new GeneratedKey();
+    private void genKey(OutputFile outputToFile, String[] dataFromConsole) {
+        GeneratedKey gk = new GeneratedKey();
         KeyPair keyPair = gk.getPairKey();
         outputToFile.createKeyFiles(dataFromConsole[1], keyPair.getPrivate(), ".sec");
         outputToFile.createKeyFiles(dataFromConsole[1], keyPair.getPublic(), ".open");
@@ -60,11 +65,7 @@ public class Runner {
         byte[] cratedSign = new byte[0];
         try {
             cratedSign = new Signature().creatSign(dataFromFile, privateKey);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (SignatureException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
             e.printStackTrace();
         }
         outputToFile.createJsonFile(dataFromConsole[2], SignMapper.signToJson(publicKey, dataFromConsole[2], cratedSign));
@@ -75,7 +76,7 @@ public class Runner {
         byte[] dataFromFile = inputFile.loadFromFiles(dataFromConsole[1]);
         byte[] signDataFromFile = inputFile.loadFromFiles(dataFromConsole[2]);
         Sign sign = SignMapper.signFromJson(signDataFromFile);
-        KeyFactory kf = null;
+        KeyFactory kf;
         try {
             kf = KeyFactory.getInstance("RSA");
             PublicKey publicKeyFromJson = kf.generatePublic
@@ -85,18 +86,12 @@ public class Runner {
             } else {
                 System.out.println("ЭЦП не верна");
             }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (SignatureException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeyException | InvalidKeySpecException | SignatureException e) {
             e.printStackTrace();
         }
     }
 
-    private void exit(){
+    private void exit() {
         this.flag = false;
     }
 }

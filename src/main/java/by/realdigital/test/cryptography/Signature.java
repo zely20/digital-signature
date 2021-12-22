@@ -8,8 +8,7 @@ public class Signature {
         java.security.Signature sign = java.security.Signature.getInstance("SHA256withRSA");
         sign.initSign(privateKey);
         sign.update(data);
-        byte[] signature = sign.sign();
-        return signature;
+        return sign.sign();
     }
 
     public boolean checkSign(byte[] data, byte[] signature, PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
