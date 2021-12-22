@@ -27,14 +27,14 @@ public class GeneratedKey {
         InputFile inputFile = new InputFileImpl();
         try {
             KeyFactory kf = KeyFactory.getInstance("RSA");
+            String privetFileName = fileName + ".sec";
+            String publicFileName = fileName + ".open";
             privateKey = kf.generatePrivate
-                    (new PKCS8EncodedKeySpec(inputFile.loadFromFiles(fileName, ".sec")));
-            publicKey = kf.generatePublic(new X509EncodedKeySpec(inputFile.loadFromFiles(fileName, ".open")));
+                    (new PKCS8EncodedKeySpec(inputFile.loadFromFiles(privetFileName)));
+            publicKey = kf.generatePublic(new X509EncodedKeySpec(inputFile.loadFromFiles(publicFileName)));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return new KeyPair(publicKey, privateKey);
     }
-
-
 }

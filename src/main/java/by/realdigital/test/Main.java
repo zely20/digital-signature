@@ -24,7 +24,7 @@ public class Main {
                 outputToFile.createKeyFiles(string[1], keyPair.getPrivate(), ".sec");
                 outputToFile.createKeyFiles(string[1], keyPair.getPublic(), ".open");
             } else if (string[0].equals("sign")) {
-                byte[] dataFromFile = inputFile.loadFromFiles(string[1], ".txt");
+                byte[] dataFromFile = inputFile.loadFromFiles(string[1]);
                 Signature signature = new Signature();
                 PrivateKey privateKey = gk.loadKeyFromFiles(string[2]).getPrivate();
                 PublicKey publicKey = gk.loadKeyFromFiles(string[2]).getPublic();
