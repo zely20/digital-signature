@@ -82,9 +82,9 @@ public class Runner {
             PublicKey publicKeyFromJson = kf.generatePublic
                     (new X509EncodedKeySpec(Base64.getDecoder().decode(sign.getKeyBase64())));
             if (signature.checkSign(dataFromFile, sign.getSignature(), publicKeyFromJson)) {
-                System.out.println("ЭЦП верна");
+                System.out.println("digital signature is VALID");
             } else {
-                System.out.println("ЭЦП не верна");
+                System.out.println("digital signature is INVALID");
             }
         } catch (NoSuchAlgorithmException | InvalidKeyException | InvalidKeySpecException | SignatureException e) {
             e.printStackTrace();
