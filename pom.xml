@@ -20,8 +20,15 @@
             <version>2.13.0</version>
         </dependency>
     </dependencies>
-    <build>
+    <!--<build>
+        <finalName>ECP</finalName>
+        <defaultGoal>package</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+            </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.0</version>
@@ -31,6 +38,23 @@
                         <manifestFile>META-INF/MANIFEST.MF</manifestFile>
                     </archive>
                     <outputDirectory>artifacts</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>-->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>by.realdigital.test.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
             </plugin>
         </plugins>

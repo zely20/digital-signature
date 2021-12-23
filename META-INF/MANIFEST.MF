@@ -1,1 +1,1 @@
-by.realdigital.test.Main.class
+Main-Class: by.realdigital.test.Main
