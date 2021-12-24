@@ -20,7 +20,7 @@ public class OutputFileImpl implements OutputFile {
     }
 
     public void createJsonFile(String fileName, String json) {
-        File file = Path.of(fileName + ".sign").toFile();
+        File file = new File(fileName + ".sign");
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(json);
         } catch (IOException e) {
